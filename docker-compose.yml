@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  roadrunner:
+    build: ./containers/roadrunner
+    container_name: "roadrunner"
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/var/www/app
+      - ./.rr.yaml:/etc/roadrunner/.rr.yaml

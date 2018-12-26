@@ -1,0 +1,17 @@
+{
+    "name": "n1215/roadrunner-docker-skeleton",
+    "description": "local docker environment skeleton for RoadRunner",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "n1215",
+            "email": "knakae1215@gmail.com"
+        }
+    ],
+    "require": {
+      "php": "^7.1.3",
+      "spiral/roadrunner": "^1.2",
+      "zendframework/zend-diactoros": "^1.6"
+    }
+}

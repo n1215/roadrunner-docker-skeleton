@@ -1,0 +1,10 @@
+._*
+.~lock.*
+.DS_Store
+.idea
+nbproject
+.project
+.settings
+composer.lock
+vendor/
+/.rr.yaml
