@@ -7,4 +7,3 @@ nbproject
 .settings
 composer.lock
 vendor/
-/.rr.yaml

@@ -8,4 +8,4 @@ services:
       - 8080:8080
     volumes:
       - ./:/var/www/app
-      - ./.rr.yaml:/etc/roadrunner/.rr.yaml
+      - ./etc/roadrunner:/etc/roadrunner

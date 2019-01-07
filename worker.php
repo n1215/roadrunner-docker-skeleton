@@ -10,7 +10,7 @@ $psr7 = new Spiral\RoadRunner\PSR7Client(new Spiral\RoadRunner\Worker($relay));
 while ($req = $psr7->acceptRequest()) {
     try {
         $resp = new \Zend\Diactoros\Response();
-        $resp->getBody()->write('Hello world!');
+        $resp->getBody()->write('Hello world from RoadRunner!');
         $psr7->respond($resp);
     } catch (\Throwable $e) {
         $psr7->getWorker()->error((string)$e);

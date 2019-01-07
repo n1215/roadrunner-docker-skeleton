@@ -1,7 +1,0 @@
-http:
-  address: :8080
-  workers:
-    command: "php /var/www/app/psr-worker.php"
-    pool:
-      numWorkers: 4
-

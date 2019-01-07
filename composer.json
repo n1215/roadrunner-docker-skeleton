@@ -1,6 +1,7 @@
 {
     "name": "n1215/roadrunner-docker-skeleton",
-    "description": "local docker environment skeleton for RoadRunner",
+    "description": "A local docker environment skeleton for RoadRunner",
+    "keywords": ["roadrunner", "docker"],
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -10,8 +11,27 @@
         }
     ],
     "require": {
-      "php": "^7.1.3",
-      "spiral/roadrunner": "^1.2",
-      "zendframework/zend-diactoros": "^1.6"
+        "php": "^7.1.3",
+        "spiral/roadrunner": "^1.3",
+        "zendframework/zend-diactoros": "^2.0"
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "@init-config"
+        ],
+        "init-config": [
+            "php -r \"file_exists('etc/roadrunner/.rr.yaml') || copy('containers/roadrunner/config/.rr.yaml', 'etc/roadrunner/.rr.yaml');\""
+        ],
+        "reset-workers": [
+            "docker exec roadrunner rr -c /etc/roadrunner/.rr.yaml http:reset"
+        ],
+        "show-workers": [
+            "docker exec roadrunner rr -c /etc/roadrunner/.rr.yaml http:workers -i"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }

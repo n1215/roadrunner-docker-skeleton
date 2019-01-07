@@ -1,24 +1,28 @@
+FROM golang:1.11 as builder
+
+ENV GO111MODULE on
+ENV RR_VERSION v1.3.0
+
+RUN apt-get update && apt-get install -y --no-install-recommends git
+
+# Build RoadRunner
+WORKDIR /go/src
+RUN git clone --depth 1 --branch ${RR_VERSION} https://github.com/spiral/roadrunner \
+  && cd /go/src/roadrunner \
+  && make \
+  && make install
+
+# PHP Image
 FROM php:7.2-cli
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  wget \
-  git \
   vim \
   zlib1g-dev \
   unzip
 
-# Install Go
-RUN wget -O - https://dl.google.com/go/go1.11.4.linux-amd64.tar.gz | tar -C /usr/local -xzf -
-ENV PATH $PATH:/usr/local/go/bin
-ENV GO111MODULE on
-
-# Install RoadRunner
-WORKDIR /go/src
-RUN git clone --depth 1 https://github.com/spiral/roadrunner \
-  && cd /go/src/roadrunner \
-  && make \
-  && make install
-COPY ./.rr.yaml /etc/roadrunner/.rr.yaml
+# Copy RoadRunner binary and config
+COPY --from=builder /go/src/roadrunner/rr /usr/local/bin/rr
+COPY config /etc/roadrunner
 
 # Install PHP Extensions
 RUN docker-php-ext-install zip \
@@ -34,4 +38,4 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 
 WORKDIR /var/www
 
-ENTRYPOINT ["/usr/local/bin/rr", "serve", "-c", "/etc/roadrunner/.rr.yaml"]
+ENTRYPOINT ["/usr/local/bin/rr", "serve", "-d", "-c", "/etc/roadrunner/.rr.yaml"]

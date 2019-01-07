@@ -3,6 +3,12 @@ A local docker environment skeleton for [RoadRunner](https://github.com/spiral/r
 
 ## Install
 
+### via Composer
+```
+composer create-project --prefer-dist n1215/roadrunner-docker-skeleton your_app
+```
+
+### via Git
 ```
 git clone https://github.com/n1215/roadrunner-docker-skeleton.git your_app
 cd your_app
@@ -10,8 +16,8 @@ cd your_app
 # install dependencies
 composer install
 
-# copy config file
-cp .rr.yaml.example .rr.yaml
+# init config
+composer init-config
 ```
 
 ## Start/Stop the docker container
@@ -35,17 +41,16 @@ docker-compose down
 Reset PHP workers in the container. (to reload your PHP source code)
 
 ```
-bin/reset-workers
+composer reset-workers
 ```
 
 Show PHP workers' status
 
 ```
-bin/show-workers
+composer show-workers
 ```
 
 ## Directory structure
-- [bin](bin) utility commands
 - [containers](containers) contains Dockerfile for RoadRunner.
-- [psr-worker.php](psr-worker.php) worker's entry point file
-- .rr.yaml RoadRunner config file.
+- etc/roadrunner contains RoadRunner config files.
+- [worker.php](worker.php) worker's entry point file
