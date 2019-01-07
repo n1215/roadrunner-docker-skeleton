@@ -8,18 +8,6 @@ A local docker environment skeleton for [RoadRunner](https://github.com/spiral/r
 composer create-project --prefer-dist n1215/roadrunner-docker-skeleton your_app
 ```
 
-### via Git
-```
-git clone https://github.com/n1215/roadrunner-docker-skeleton.git your_app
-cd your_app
-
-# install dependencies
-composer install
-
-# init config
-composer init-config
-```
-
 ## Start/Stop the docker container
 
 ### Start
