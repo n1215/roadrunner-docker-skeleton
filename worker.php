@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-include 'vendor/autoload.php';
+require 'vendor/autoload.php';
 
-$worker = Spiral\RoadRunner\Worker::create();
-$psr17Factory = new Nyholm\Psr7\Factory\Psr17Factory();
-$psr7Worker = new Spiral\RoadRunner\Http\PSR7Worker($worker, $psr17Factory, $psr17Factory, $psr17Factory);
+/** @var Slim\App $app */
+$app = require_once __DIR__ . '/app.php';
+
+/** @var Spiral\RoadRunner\Http\PSR7WorkerInterface $psr7Worker */
+$psr7Worker = $app->getContainer()->get(Spiral\RoadRunner\Http\PSR7WorkerInterface::class);
 
 while ($req = $psr7Worker->waitRequest()) {
     try {
-        $res = $psr17Factory->createResponse();
-        $res->getBody()->write('Hello world from RoadRunner!');
+        $res = $app->handle($req);
         $psr7Worker->respond($res);
     } catch (Throwable $e) {
         $psr7Worker->getWorker()->error((string)$e);
