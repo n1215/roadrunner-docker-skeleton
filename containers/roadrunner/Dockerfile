@@ -3,7 +3,8 @@ FROM golang:1.11 as builder
 ENV GO111MODULE on
 ENV RR_VERSION v1.3.0
 
-RUN apt-get update && apt-get install -y --no-install-recommends git
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git
 
 # Build RoadRunner
 WORKDIR /go/src
@@ -15,14 +16,12 @@ RUN git clone --depth 1 --branch ${RR_VERSION} https://github.com/spiral/roadrun
 # PHP Image
 FROM php:7.2-cli
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  vim \
-  zlib1g-dev \
-  unzip
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends vim zlib1g-dev unzip
 
 # Copy RoadRunner binary and config
 COPY --from=builder /go/src/roadrunner/rr /usr/local/bin/rr
-COPY config /etc/roadrunner
+#COPY config /etc/roadrunner # is empty
 
 # Install PHP Extensions
 RUN docker-php-ext-install zip \
