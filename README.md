@@ -1,6 +1,10 @@
 # roadrunner-docker-skeleton
 A local docker environment skeleton for [RoadRunner](https://github.com/spiral/roadrunner), the PHP application server written in golang.
 
+[![Latest Stable Version](https://poser.pugx.org/n1215/roadrunner-docker-skeleton/v/stable)](https://packagist.org/packages/n1215/roadrunner-docker-skeleton)
+[![License](https://poser.pugx.org/n1215/roadrunner-docker-skeleton/license)](https://packagist.org/packages/n1215/roadrunner-docker-skeleton)
+[![Travis build status](https://travis-ci.org/n1215/roadrunner-docker-skeleton.svg?branch=master)](https://travis-ci.org/n1215/roadrunner-docker-skeleton)
+
 ## Install
 
 ### via Composer
