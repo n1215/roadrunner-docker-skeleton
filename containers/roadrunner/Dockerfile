@@ -1,7 +1,7 @@
-FROM golang:1.11 as builder
+FROM golang:1.12 as builder
 
 ENV GO111MODULE on
-ENV RR_VERSION v1.3.0
+ENV RR_VERSION v1.3.7
 
 RUN apt-get update && apt-get install -y --no-install-recommends git
 
@@ -13,11 +13,11 @@ RUN git clone --depth 1 --branch ${RR_VERSION} https://github.com/spiral/roadrun
   && make install
 
 # PHP Image
-FROM php:7.2-cli
+FROM php:7.3-cli
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   vim \
-  zlib1g-dev \
+  libzip-dev \
   unzip
 
 # Copy RoadRunner binary and config
