@@ -1,7 +1,7 @@
 FROM golang:1.12 as builder
 
 ENV GO111MODULE on
-ENV RR_VERSION v1.3.7
+ENV RR_VERSION v1.4.2
 
 RUN apt-get update && apt-get install -y --no-install-recommends git
 
