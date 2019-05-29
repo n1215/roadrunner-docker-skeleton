@@ -1,28 +1,9 @@
-FROM golang:1.12 as builder
-
-ENV GO111MODULE on
-ENV RR_VERSION v1.4.2
-
-RUN apt-get update && apt-get install -y --no-install-recommends git
-
-# Build RoadRunner
-WORKDIR /go/src
-RUN git clone --depth 1 --branch ${RR_VERSION} https://github.com/spiral/roadrunner \
-  && cd /go/src/roadrunner \
-  && make \
-  && make install
-
-# PHP Image
 FROM php:7.3-cli
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   vim \
   libzip-dev \
   unzip
-
-# Copy RoadRunner binary and config
-COPY --from=builder /go/src/roadrunner/rr /usr/local/bin/rr
-COPY config /etc/roadrunner
 
 # Install PHP Extensions
 RUN docker-php-ext-install zip \
@@ -35,6 +16,18 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
   && php composer-setup.php \
   && php -r "unlink('composer-setup.php');" \
   && mv composer.phar /usr/local/bin/composer
+
+# Download RoadRunner
+ENV RR_VERSION 1.4.2
+RUN mkdir /tmp/rr \
+  && cd /tmp/rr \
+  && echo "{\"require\":{\"spiral/roadrunner\":\"${RR_VERSION}\"}}" >> composer.json \
+  && composer install \
+  && vendor/bin/rr get-binary -l /usr/local/bin \
+  && rm -rf /tmp/rr
+
+# Copy RoadRunner config
+COPY config /etc/roadrunner
 
 WORKDIR /var/www
 
