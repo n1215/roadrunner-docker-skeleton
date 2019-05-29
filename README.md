@@ -56,7 +56,7 @@ composer show-workers
 
 Watch PHP source code change and reload PHP workers
 ```
-composer show-workers
+composer watch
 ```
 
 
