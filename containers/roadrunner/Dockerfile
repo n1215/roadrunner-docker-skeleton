@@ -3,7 +3,9 @@ FROM php:7.3-cli
 RUN apt-get update && apt-get install -y --no-install-recommends \
   vim \
   libzip-dev \
-  unzip
+  unzip \
+  procps \
+  inotify-tools
 
 # Install PHP Extensions
 RUN docker-php-ext-install zip \

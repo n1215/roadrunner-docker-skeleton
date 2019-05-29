@@ -54,6 +54,12 @@ Show PHP workers' status
 composer show-workers
 ```
 
+Watch PHP source code change and reload PHP workers
+```
+composer show-workers
+```
+
+
 ## Directory structure
 - [containers](containers) contains Dockerfile for RoadRunner.
 - etc/roadrunner contains RoadRunner config files.
