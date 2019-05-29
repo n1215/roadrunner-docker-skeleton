@@ -29,7 +29,7 @@
             "docker exec roadrunner rr -c /etc/roadrunner/.rr.yaml http:workers -i"
         ],
         "watch": [
-            "docker exec roadrunner bash /var/www/app/watch.sh"
+            "docker exec -d roadrunner bash /var/www/app/watch.sh"
         ]
     },
     "config": {
