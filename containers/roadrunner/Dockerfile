@@ -20,7 +20,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
   && mv composer.phar /usr/local/bin/composer
 
 # Download RoadRunner
-ENV RR_VERSION 1.5.3
+ENV RR_VERSION 1.6.0
 RUN mkdir /tmp/rr \
   && cd /tmp/rr \
   && echo "{\"require\":{\"spiral/roadrunner\":\"${RR_VERSION}\"}}" >> composer.json \
