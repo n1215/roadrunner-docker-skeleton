@@ -1,0 +1,37 @@
+name: Build
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        docker-compose: ["1.25.3", "1.9.0"]
+        php: ['7.3']
+    name: Docker Compose v${{ matrix.docker-compose }}
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Setup docker-compose
+        run: |
+          curl -L https://github.com/docker/compose/releases/download/${{ matrix.docker-compose }}/docker-compose-Linux-x86_64 > docker-compose
+          chmod +x docker-compose
+
+      - name: Initialize
+        run: |
+          composer install
+          composer init-config
+
+      - name: Build
+        run: ./docker-compose up -d
+
+      - name: Test reset workers
+        run: composer reset-workers
+
+      - name: Test http request
+        run: curl http://127.0.0.1:8080
