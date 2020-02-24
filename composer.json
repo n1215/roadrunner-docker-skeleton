@@ -15,7 +15,7 @@
         "nyholm/psr7": "^1.2",
         "php-di/php-di": "^6.0",
         "slim/slim": "^4.0",
-        "spiral/roadrunner": "1.6.1"
+        "spiral/roadrunner": "1.6.2"
     },
     "scripts": {
         "post-create-project-cmd": [
