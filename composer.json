@@ -13,7 +13,7 @@
     "require": {
         "php": "^7.1.3",
         "nyholm/psr7": "^1.2",
-        "spiral/roadrunner": "1.7.0"
+        "spiral/roadrunner": "1.7.1"
     },
     "scripts": {
         "post-create-project-cmd": [
