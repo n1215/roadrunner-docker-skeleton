@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        docker-compose: ["1.25.3", "1.9.0"]
-        php: ['7.3']
+        docker-compose: ["1.27.4", "1.9.0"]
+        php: ['8.0']
     name: Docker Compose v${{ matrix.docker-compose }}
     steps:
       - uses: actions/checkout@master

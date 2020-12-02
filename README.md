@@ -54,11 +54,11 @@ Show PHP workers' status
 composer show-workers
 ```
 
-Watch PHP source code change and reload PHP workers
-```
-composer watch
-```
+## Auto-Reloading
+Auto reloading is enabled by default. RoadRunner detects PHP file changes and reload connected services.
+To turn off this feature, remove the `reload` section in .rr.yaml.
 
+see: [Roadrunner : Auto-Reloading](https://roadrunner.dev/docs/beep-beep-reload)
 
 ## Directory structure
 - [containers](containers) contains Dockerfile for RoadRunner.

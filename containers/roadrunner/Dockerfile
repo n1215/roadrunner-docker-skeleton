@@ -1,11 +1,9 @@
-FROM php:7.3-cli
+FROM php:8.0-cli
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   vim \
   libzip-dev \
-  unzip \
-  procps \
-  inotify-tools
+  unzip
 
 # Install PHP Extensions
 RUN docker-php-ext-install zip \
@@ -13,14 +11,10 @@ RUN docker-php-ext-install zip \
   && docker-php-ext-enable opcache
 
 # Install Composer
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-  && php -r "if (hash_file('SHA384', 'composer-setup.php') === rtrim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \
-  && php composer-setup.php \
-  && php -r "unlink('composer-setup.php');" \
-  && mv composer.phar /usr/local/bin/composer
+COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
 # Download RoadRunner
-ENV RR_VERSION 1.6.2
+ENV RR_VERSION 1.9.0
 RUN mkdir /tmp/rr \
   && cd /tmp/rr \
   && echo "{\"require\":{\"spiral/roadrunner\":\"${RR_VERSION}\"}}" >> composer.json \
