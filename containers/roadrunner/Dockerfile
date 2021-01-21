@@ -14,7 +14,7 @@ RUN docker-php-ext-install zip \
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
 # Download RoadRunner
-ENV RR_VERSION 1.9.1
+ENV RR_VERSION 1.9.2
 RUN mkdir /tmp/rr \
   && cd /tmp/rr \
   && echo "{\"require\":{\"spiral/roadrunner\":\"${RR_VERSION}\"}}" >> composer.json \
