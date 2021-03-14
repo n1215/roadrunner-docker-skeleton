@@ -1,30 +1,30 @@
-FROM php:8.0-cli
+ARG RR_VERSION
+ARG RR_IMAGE=spiralscout/roadrunner:${RR_VERSION}
+ARG PHP_IMAGE_VERSION
+ARG PHP_IMAGE=php:${PHP_IMAGE_VERSION}
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+FROM ${RR_IMAGE} as rr
+
+FROM ${PHP_IMAGE}
+
+RUN apk update && apk add --no-cache \
   vim \
   libzip-dev \
   unzip
 
 # Install PHP Extensions
 RUN docker-php-ext-install zip \
+  && docker-php-ext-install sockets \
   && docker-php-ext-install opcache \
   && docker-php-ext-enable opcache
 
-# Install Composer
-COPY --from=composer /usr/bin/composer /usr/local/bin/composer
+# Copy Composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-# Download RoadRunner
-ENV RR_VERSION 1.9.2
-RUN mkdir /tmp/rr \
-  && cd /tmp/rr \
-  && echo "{\"require\":{\"spiral/roadrunner\":\"${RR_VERSION}\"}}" >> composer.json \
-  && composer install \
-  && vendor/bin/rr get-binary -l /usr/local/bin \
-  && rm -rf /tmp/rr
+# Copy RoadRunner
+COPY --from=rr /usr/bin/rr /usr/bin/rr
 
 # Copy RoadRunner config
-COPY config /etc/roadrunner
+COPY --from=rr /etc/rr.yaml /etc/rr.yaml
 
-WORKDIR /var/www
-
-ENTRYPOINT ["/usr/local/bin/rr", "serve", "-d", "-c", "/etc/roadrunner/.rr.yaml"]
+CMD ["/usr/bin/rr", "serve", "-d", "-c", "/etc/rr.yaml"]

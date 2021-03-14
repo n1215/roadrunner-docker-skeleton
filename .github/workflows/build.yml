@@ -7,15 +7,9 @@ jobs:
     strategy:
       matrix:
         docker-compose: ["1.27.4", "1.9.0"]
-        php: ['8.0']
     name: Docker Compose v${{ matrix.docker-compose }}
     steps:
       - uses: actions/checkout@master
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
 
       - name: Setup docker-compose
         run: |
@@ -23,15 +17,10 @@ jobs:
           chmod +x docker-compose
 
       - name: Initialize
-        run: |
-          composer install
-          composer init-config
+        run: ./task init
 
       - name: Build
-        run: ./docker-compose up -d
-
-      - name: Test reset workers
-        run: composer reset-workers
+        run: ./task up
 
       - name: Test http request
         run: curl http://127.0.0.1:8080
