@@ -2,10 +2,16 @@ version: '2'
 
 services:
   roadrunner:
-    build: ./containers/roadrunner
-    container_name: "roadrunner"
+    build:
+      context: ./containers/roadrunner
+      args:
+        RR_VERSION: ${RR_VERSION}
+        PHP_IMAGE_VERSION: ${PHP_IMAGE_VERSION}
     ports:
       - 8080:8080
+    environment:
+      RR_VERSION: ${RR_VERSION}
+    working_dir: /app
     volumes:
-      - ./:/var/www/app:cached
-      - ./etc/roadrunner:/etc/roadrunner:cached
+      - ./:/app
+      - ./containers/roadrunner/config/.rr.yaml:/etc/rr.yaml:ro

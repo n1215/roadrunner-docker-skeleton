@@ -12,22 +12,8 @@
     ],
     "require": {
         "php": "^7.3 || ^8.0",
-        "nyholm/psr7": "^1.3",
-        "spiral/roadrunner": "1.9.2"
-    },
-    "scripts": {
-        "post-create-project-cmd": [
-            "@init-config"
-        ],
-        "init-config": [
-            "php -r \"file_exists('etc/roadrunner/.rr.yaml') || copy('containers/roadrunner/config/.rr.yaml', 'etc/roadrunner/.rr.yaml');\""
-        ],
-        "reset-workers": [
-            "docker exec roadrunner rr -c /etc/roadrunner/.rr.yaml http:reset"
-        ],
-        "show-workers": [
-            "docker exec roadrunner rr -c /etc/roadrunner/.rr.yaml http:workers -i"
-        ]
+        "nyholm/psr7": "^1.4",
+        "spiral/roadrunner": "2.0.4"
     },
     "config": {
         "preferred-install": "dist",

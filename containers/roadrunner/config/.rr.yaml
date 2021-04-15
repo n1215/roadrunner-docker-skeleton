@@ -1,20 +1,16 @@
+server:
+  command: "php /app/worker.php"
+
 http:
   address: :8080
-  workers:
-    command: "php /var/www/app/worker.php"
-    pool:
-      numWorkers: 4
+  pool:
+    num_workers: 4
+    max_jobs: 64
 
-# reload can reset rr servers when files change
 reload:
-  # refresh internval (default 1s)
   interval: 1s
-  # file extensions to watch, defaults to [.php]
-  patterns: [".php"]
-  # list of services to watch
+  patterns: [ ".php" ]
   services:
     http:
-      # list of dirs, "" root
-      dirs: ["/var/www/app"]
-      # include sub directories
       recursive: true
+      dirs: [ "/app" ]
