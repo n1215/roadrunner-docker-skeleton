@@ -17,6 +17,9 @@ function init {
   echo "Copy .env file..."
   cp .env.example .env
 
+  echo "Build docker images..."
+  docker-compose build
+
   echo "Install PHP dependencies..."
   docker-compose run roadrunner sh -c 'composer require spiral/roadrunner:${RR_VERSION}'
 
