@@ -22,5 +22,8 @@ jobs:
       - name: Build
         run: ./task up
 
+      - name: Wait for the RoadRunner container
+        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml run wait roadrunner:8080 -- echo "RoadRunner is up"
+
       - name: Test http request
         run: curl http://127.0.0.1:8080

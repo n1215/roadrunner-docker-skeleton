@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  wait:
+    image: willwill/wait-for-it:latest
