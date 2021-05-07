@@ -15,7 +15,7 @@ function init {
   echo "Stating Initialization..."
 
   echo "Copy .env file..."
-  cp .env.example .env
+  cp -n .env.example .env
 
   echo "Build docker images..."
   docker-compose build

@@ -71,18 +71,14 @@ and access http://localhost:8080
 ### 1. change .env file
 ex)
 ```
-- RR_VERSION=2.0.4
-+ RR_VERSION=2.0.5
+- RR_VERSION=2.1.1
++ RR_VERSION=2.1.0
 ```
 
-### 2. update composer dependencies
+### 2. run the initialization script
+rebuild the RoadRunner image and update composer dependencies.
 ```
 ./task init
-```
-
-### 3. rebuild the RoadRunner image
-```
-./task up --build
 ```
 
 ## Auto-Reloading
