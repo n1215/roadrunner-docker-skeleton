@@ -13,7 +13,7 @@
     "require": {
         "php": "^7.3 || ^8.0",
         "nyholm/psr7": "^1.4",
-        "spiral/roadrunner": "2.1.1"
+        "spiral/roadrunner": "2.2.1"
     },
     "config": {
         "preferred-install": "dist",
