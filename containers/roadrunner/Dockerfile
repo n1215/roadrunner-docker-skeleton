@@ -19,7 +19,7 @@ RUN docker-php-ext-install zip \
   && docker-php-ext-enable opcache
 
 # Copy Composer
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Copy RoadRunner
 COPY --from=rr /usr/bin/rr /usr/bin/rr
