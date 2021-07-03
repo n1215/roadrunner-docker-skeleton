@@ -10,7 +10,8 @@ FROM ${PHP_IMAGE}
 RUN apk update && apk add --no-cache \
   vim \
   libzip-dev \
-  unzip
+  unzip \
+  bash
 
 # Install PHP Extensions
 RUN docker-php-ext-install zip \
