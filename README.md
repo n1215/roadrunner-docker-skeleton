@@ -71,8 +71,8 @@ and access http://localhost:8080
 ### 1. change .env file
 ex)
 ```
-- RR_VERSION=2.3.1
-+ RR_VERSION=2.3.0
+- RR_VERSION=2.5.0
++ RR_VERSION=2.4.1
 ```
 
 ### 2. run the initialization script
