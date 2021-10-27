@@ -19,7 +19,7 @@ jobs:
       - name: Initialize
         run: ./task init
 
-      - name: Build
+      - name: Start the RoadRunner container
         run: ./task up
 
       - name: Wait for the RoadRunner container
